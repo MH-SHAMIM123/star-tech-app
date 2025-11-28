@@ -1,10 +1,3 @@
-/**
- * App Navigation Setup
- * 
- * Stack Navigator: For screen transitions
- * Bottom Tab Navigator: Main app navigation
- */
-
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -13,18 +6,20 @@ import { Text } from 'react-native';
 import HomeScreen from '../screens/HomeScreen';
 import CartScreen from '../screens/CartScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import LoginScreen from '../screens/LoginScreen';
+import RegisterScreen from '../screens/RegisterScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-// Bottom Tab Navigator for main app sections
+// Bottom Tab Navigator
 function HomeTabs() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: '#E51C36',  // Star Tech red for active tab
-        tabBarInactiveTintColor: 'gray',   // Gray for inactive tabs
-        headerShown: false,                // Hide header for tabs
+        tabBarActiveTintColor: '#E51C36',
+        tabBarInactiveTintColor: 'gray',
+        headerShown: false,
       }}
     >
       <Tab.Screen 
@@ -55,13 +50,26 @@ function HomeTabs() {
   );
 }
 
-// Main App Navigator
+// Main App Navigator - FIXED VERSION
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Main" component={HomeTabs} options={{ headerShown: false }} />
-        {/* Add more screens here for product details, search, etc. */}
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen 
+          name="Login" 
+          component={LoginScreen} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="Register" 
+          component={RegisterScreen} 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="Main" 
+          component={HomeTabs} 
+          options={{ headerShown: false }} 
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
